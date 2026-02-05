@@ -15,11 +15,12 @@ Open KKU Website Successfully
 
 *** Keywords ***
 Open Browser To Website
-    ${options}=    Evaluate
-    ...    sys.modules['selenium.webdriver'].ChromeOptions()    sys
+    ${options}=    Evaluate    sys.modules['selenium.webdriver'].ChromeOptions()    sys, selenium.webdriver
+    ${options.binary_location}=    Set Variable    /usr/bin/chromium
     Call Method    ${options}    add_argument    --no-sandbox
     Call Method    ${options}    add_argument    --disable-dev-shm-usage
     Call Method    ${options}    add_argument    --headless
+    Call Method    ${options}    add_argument    --disable-gpu
     
     Create Webdriver    Chrome    options=${options}
     Go To    ${URL}
